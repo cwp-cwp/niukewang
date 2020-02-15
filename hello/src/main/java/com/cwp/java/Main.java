@@ -1,9 +1,8 @@
 package com.cwp.java;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
+@SuppressWarnings("Duplicates")
 public class Main {
 
 
@@ -769,37 +768,319 @@ public class Main {
      * 5
      * 40
      */
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
+//
+//        Scanner scanner = new Scanner(System.in);
+//        List<Integer> list = new ArrayList<>();
+//        while (scanner.hasNext()) {
+//            int n = scanner.nextInt();
+//            if (n == 0) {
+//                break;
+//            }
+//            list.add(n);
+//        }
+////        System.out.println(list);
+//
+//        for (int n : list) {
+//            int count = count(n);
+//            System.out.println(count);
+//        }
+//
+//    }
+//
+//    /**
+//     * @param n 空汽水瓶数量
+//     * @return 最多可换汽水瓶数量
+//     */
+//    private static int count(int n) {
+//        if (n == 1) return 0;
+//        if (n == 2) return 1;
+//        return count(n - 2) + 1;
+//    }
 
+    /**
+     * 题目描述
+     * 王强今天很开心，公司发给N元的年终奖。王强决定把年终奖用于购物，他把想买的物品分为两类：
+     * 主件与附件，附件是从属于某个主件的，下表就是一些主件与附件的例子：
+     * 主件	附件
+     * 电脑	打印机，扫描仪
+     * 书柜	图书
+     * 书桌	台灯，文具
+     * 工作椅	无
+     * 如果要买归类为附件的物品，必须先买该附件所属的主件。每个主件可以有 0 个、 1 个或 2 个附件。
+     * 附件不再有从属于自己的附件。王强想买的东西很多，为了不超出预算，他把每件物品规定了一个重要度，分为 5 等：
+     * 用整数 1 ~ 5 表示，第 5 等最重要。他还从因特网上查到了每件物品的价格（都是 10 元的整数倍）。
+     * 他希望在不超过 N 元（可以等于 N 元）的前提下，使每件物品的价格与重要度的乘积的总和最大。
+     * 设第 j 件物品的价格为 v[j] ，重要度为 w[j] ，共选中了 k 件物品，编号依次为 j 1 ， j 2 ，……， j k ，则所求的总和为：
+     * v[j 1 ]*w[j 1 ]+v[j 2 ]*w[j 2 ]+ … +v[j k ]*w[j k ] 。（其中 * 为乘号）
+     * 请你帮助王强设计一个满足要求的购物单。
+     * <p>
+     * 输入描述:
+     * 输入的第 1 行，为两个正整数，用一个空格隔开：N m
+     * （其中 N （ <32000 ）表示总钱数， m （ <60 ）为希望购买物品的个数。）
+     * 从第 2 行到第 m+1 行，第 j 行给出了编号为 j-1 的物品的基本数据，每行有 3 个非负整数 v p q
+     * （其中 v 表示该物品的价格（ v<10000 ）， p 表示该物品的重要度（ 1 ~ 5 ），
+     * q 表示该物品是主件还是附件。如果 q=0 ，表示该物品为主件，如果 q>0 ，表示该物品为附件， q 是所属主件的编号）
+     * <p>
+     * 输出描述:
+     * 输出文件只有一个正整数，为不超过总钱数的物品的价格与重要度乘积的总和的最大值（ <200000 ）。
+     * 示例1
+     * 输入
+     * 1000 5
+     * 800 2 0
+     * 400 5 1
+     * 300 5 1
+     * 400 3 0
+     * 500 2 0
+     * 输出
+     * 2200
+     */
+//    public static void main(String[] args) throws IOException {
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        String str = br.readLine();
+//        int N = Integer.parseInt(str.split(" ")[0]) / 10;
+//        int m = Integer.parseInt(str.split(" ")[1]);
+//        int[] v = new int[m + 1];
+//        int[] p = new int[m + 1];
+//        int[] q = new int[m + 1];
+//        boolean[] flags = new boolean[m + 1];
+//        int[][] res = new int[m + 1][N + 1];
+//        for (int i = 1; i <= m; i++) {
+//            String readLine = br.readLine();
+//            if (readLine != null) {
+//                String[] strings = readLine.split("\\ ");
+//                v[i] = (Integer.parseInt(strings[0])) / 10;
+//                p[i] = Integer.parseInt(strings[1]) * v[i];
+//                q[i] = Integer.parseInt(strings[2]);
+//            }
+//        }
+//
+//        for (int i = 1; i <= m; i++) {
+//            for (int j = 1; j <= N; j++) {
+//                if (q[i] == 0) {
+//                    if (v[i] <= j) {
+//                        res[i][j] = Math.max(res[i - 1][j], res[i - 1][j - v[i]] + p[i]);
+//                    }
+//                } else {
+//                    if (v[i] + v[q[i]] <= j) {
+//                        res[i][j] = Math.max(res[i - 1][j], res[i - 1][j - v[i]] + p[i]);
+//                    }
+//                }
+//            }
+//        }
+//        System.out.println(res[m][N] * 10);
+//    }
+
+    /**
+     * 题目描述
+     * 计算最少出列多少位同学，使得剩下的同学排成合唱队形
+     * <p>
+     * 说明：
+     * N位同学站成一排，音乐老师要请其中的(N-K)位同学出列，使得剩下的K位同学排成合唱队形。
+     * 合唱队形是指这样的一种队形：设K位同学从左到右依次编号为1，2…，K，他们的身高分别为T1，T2，…，TK，
+     * 则他们的身高满足存在i（1<=i<=K）使得T1<T2<......<Ti-1<Ti>Ti+1>......>TK。
+     * 你的任务是，已知所有N位同学的身高，计算最少需要几位同学出列，可以使得剩下的同学排成合唱队形。
+     * <p>
+     * 输入描述:
+     * 整数N
+     * <p>
+     * 输出描述:
+     * 最少需要几位同学出列
+     * <p>
+     * 示例1
+     * 输入
+     * 8
+     * 186 186 150 200 160 130 197 200
+     * 输出
+     * 4
+     */
+//    public static void main(String[] args) throws IOException {
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        String s;
+//        while ((s = br.readLine()) != null) {
+//            int number = Integer.parseInt(s);
+//            // 处理身高数据
+//            s = br.readLine();
+//            String[] nums = s.split(" ");
+//            int[] arrForw = new int[number];
+//            int[] arrBack = new int[number];
+//            for (int i = 0; i < number; ++i) {
+//                arrForw[i] = Integer.parseInt(nums[i]);
+//                arrBack[number - 1 - i] = arrForw[i];
+//            }
+//            int[] forw = new int[number];
+//            int[] back = new int[number];
+//            for (int i = 0; i < number; ++i) {
+//                forw[i] = 1;
+//                back[i] = 1;
+//            }
+//            calNum(arrForw, forw);
+//            calNum(arrBack, back);
+//            int max = 0;
+//            for (int i = 0; i < number; ++i) {
+//                forw[i] += back[number - 1 - i];
+//
+//                if (forw[i] > max)
+//                    max = forw[i];
+//            }
+//            System.out.println(number - max + 1);
+//        }
+//    }
+//
+//    public static void calNum(int[] arr, int[] dest) {
+//        for (int i = 1; i < arr.length; ++i) {
+//            for (int j = i - 1; j >= 0; --j) {
+//                if (arr[i] > arr[j] && dest[i] <= dest[j])
+//                    dest[i] = dest[j] + 1;
+//            }
+//        }
+//    }
+
+    /**
+     * 题目描述
+     * 输入一个单向链表，输出该链表中倒数第k个结点，链表的倒数第1个结点为链表的尾指针。
+     * <p>
+     * 链表结点定义如下：
+     * struct ListNode
+     * {
+     * int       m_nKey;
+     * ListNode* m_pNext;
+     * };
+     * 详细描述：
+     * 接口说明
+     * 原型：
+     * ListNode* FindKthToTail(ListNode* pListHead, unsignedint k);
+     * 输入参数：
+     * ListNode* pListHead  单向链表
+     * unsigned int k  倒数第k个结点
+     * 输出参数（指针指向的内存区域保证有效）：
+     * 无
+     * 返回值：
+     * 正常返回倒数第k个结点指针，异常返回空指针
+     * 输入描述:
+     * 输入说明
+     * 1 输入链表结点个数
+     * 2 输入链表的值
+     * 3 输入k的值
+     * <p>
+     * 输出描述:
+     * 输出一个整数
+     * <p>
+     * 示例1
+     * 输入
+     * 8
+     * 1 2 3 4 5 6 7 8
+     * 4
+     * 输出
+     * 5
+     */
+//    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//        while (scanner.hasNext()) {
+//            int count = Integer.parseInt(scanner.nextLine());
+//            String str = scanner.nextLine();
+//            int k = Integer.parseInt(scanner.nextLine());
+//            String[] split = str.split(" ");
+//            int index = 0;
+//            if (k == 0) {
+//                System.out.println(0);
+//                continue;
+//            }
+//            for (int i = split.length - 1; i >= 0; i--) {
+//                index++;
+//                if (index == k) {
+//                    System.out.println(split[i]);
+//                }
+//            }
+//        }
+//
+//    }
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        List<Integer> list = new ArrayList<>();
+        int count = 0;
+        List<List<Integer>> lists = new ArrayList<>();
         while (scanner.hasNext()) {
-            int n = scanner.nextInt();
-            if (n == 0) {
+            count++;
+            String str = scanner.nextLine();
+            List<Integer> list = new ArrayList<>();
+            String[] split = str.split(" ");
+            for (String s : split) {
+                list.add(Integer.parseInt(s));
+            }
+            lists.add(list);
+            if (count == 3) {
                 break;
             }
-            list.add(n);
         }
-//        System.out.println(list);
+//        System.out.println(lists);
 
-        for (int n : list) {
-            int count = count(n);
-            System.out.println(count);
+        List<String> result = new ArrayList<>();
+        for (List<Integer> list : lists) {
+            String res = handle(list);
+            result.add(res);
         }
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < result.size(); i++) {
+            stringBuilder.append(result.get(i) + " ");
+        }
+        System.out.println(stringBuilder.substring(0, stringBuilder.length() - 1));
 
     }
 
-    /**
-     * @param n 空汽水瓶数量
-     * @return 最多可换汽水瓶数量
-     */
-    private static int count(int n) {
-        if (n == 1) return 0;
-        if (n == 2) return 1;
-        return count(n - 2) + 1;
+    private static String handle(List<Integer> list) {
+        String result = "";
+        List<Integer> temp = new ArrayList<>();
+        Set<Integer> set = new HashSet<>();
+        List<Integer> temp2 = new ArrayList<>();
+        Set<Integer> set2 = new HashSet<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (i % 2 == 0) {
+                temp.add(list.get(i));
+            } else {
+                temp2.add(list.get(i));
+            }
+        }
+        for (Integer i : temp) {
+            set.add(String.valueOf(i).length());
+        }
+        for (Integer i : temp2) {
+            set2.add(String.valueOf(i).length());
+        }
+//        System.out.println(set.size() + " == " + set2.size());
+        if (set.size() == 1 && set2.size() == 1) {
+            result = "true";
+            return result;
+        }
+
+//        List<Integer> temp3 = new ArrayList<>();
+//
+//        for (int i = 1; i < list.size() - 1; i++) {
+//            temp3.add(list.get(i));
+//        }
+
+        boolean flag = false;
+        for (int i = 1; i < list.size() - 1; i++) {
+            if (String.valueOf(list.get(i)).length() == 2 && String.valueOf(list.get(0)).length() == 1 && String.valueOf(list.get(list.size() - 1)).length() == 1) {
+                flag = true;
+            } else if (String.valueOf(list.get(i)).length() == 1 && String.valueOf(list.get(0)).length() == 2 && String.valueOf(list.get(list.size() - 1)).length() == 2) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+        }
+        if (flag) {
+            result = "true";
+            return result;
+        } else {
+            result = "false";
+            return result;
+        }
     }
 
 
 }
+
+
 
 
